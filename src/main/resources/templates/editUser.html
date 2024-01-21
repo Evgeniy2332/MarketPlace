@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование пользователя</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>Редактирование профиля</h1>
+
+<form th:action="@{/update-user}" th:object="${user}" method="post">
+    <div>
+        <label for="name">Имя:</label>
+        <input type="text" id="name" th:field="*{name}" required />
+    </div>
+    <div>
+        <label for="email">Электронная почта:</label>
+        <input type="email" id="email" th:field="*{email}" required />
+    </div>
+    <div>
+        <label for="phoneNumber">Телефонный номер:</label>
+        <input type="text" id="phoneNumber" th:field="*{phoneNumber}" />
+    </div>
+
+    <!-- В случае если при обновлении есть скрытые поля, например, ID пользователя -->
+    <input type="hidden" th:field="*{id}" />
+    <input type="hidden" th:field="*{active}" />
+    <div>
+        <input type="submit" value="Сохранить изменения" />
+    </div>
+
+    <!-- Вывод сообщения об успешном обновлении или ошибке -->
+    <div th:if="${message}" th:text="${message}"></div>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css" th:href="@{/css/styles.css}">
+    <style>
+        /* Your embedded CSS can go here if required, or better use linked CSS file */
+        body {
+                    background: linear-gradient(to right, #FFFFFF, #50C878);
+                    color: #ffffff;
+                    text-align: center;
+                    font-size: 24px;
+                    padding: 100px;
+                }
+    </style>
+</head>
+<body>
+
+<h1>Авторизация</h1>
+<form th:action="@{/login}" method="post">
+    <p>
+        Эл. почта: <label>
+        <input type="email" name="username"/>
+    </label>
+    </p>
+    <p>
+        Пароль: <label>
+        <input type="password" name="password"/>
+    </label>
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+    </p>
+    <p>
+        <input type="submit" value="Вход"/>
+    </p>
+</form>
+<p>
+    <a href="/registration" th:href="@{/registration}">Зарегистрироваться</a>
+</p>
+
+</body>
+</html>

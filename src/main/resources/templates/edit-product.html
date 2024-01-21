@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование товара</title>
+    <!-- Подключение стилей (путь к CSS-файлу может быть другим) -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<!-- Основной контент страницы -->
+<main>
+    <h1>Редактирование товара</h1>
+    <!-- Ваша форма для редактирования товара -->
+    <form th:action="@{/product/update}" th:object="${product}" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="title">Название:</label>
+            <input type="text" id="title" th:field="*{title}" required />
+        </div>
+        <div>
+            <label for="description">Описание:</label>
+            <textarea id="description" th:field="*{description}"></textarea>
+        </div>
+        <div>
+            <label for="price">Цена:</label>
+            <input type="number" id="price" th:field="*{price}" required />
+        </div>
+        <div>
+            <label for="city">Город:</label>
+            <input type="text" id="city" th:field="*{city}" required />
+        </div>
+        <!-- Поле для автора (скрытое поле) -->
+        <input type="hidden" id="user" th:field="*{user}" th:value="${product.user.email}" />
+
+        <div>
+            <label for="image">Изображение товара:</label>
+            <input type="file" id="image" name="file" />
+            <!-- Отображение уже загруженных изображений -->
+            <ul>
+                <li th:each="image, imageIndex : ${existingImages}">
+                    <img th:src="@{'/images/' + ${image.id}}" alt="Image" />
+                    <input type="file" name="existingImage" th:id="'existingImage' + ${imageIndex.index}" />
+                </li>
+            </ul>
+
+        </div>
+        <div>
+            <label for="image2">Дополнительное изображение 1:</label>
+            <input type="file" id="image2" name="file2" />
+        </div>
+        <div>
+            <label for="image3">Дополнительное изображение 2:</label>
+            <input type="file" id="image3" name="file3" />
+        </div>
+        <!-- Поле для id продукта, которое останется скрытым -->
+        <input type="hidden" th:field="*{id}" />
+        <!-- Здесь можно добавить элемент input для загрузки файлов, если требуется -->
+        <button type="submit">Обновить товар</button>
+    </form>
+</main>
+
+<!-- Подключение скриптов (путь к JS-файлу может быть другим) -->
+<script src="/js/scripts.js"></script>
+
+</body>
+</html>

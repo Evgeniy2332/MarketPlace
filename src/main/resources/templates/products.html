@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Dashboard</title>
+    <style>
+        body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(to right bottom, #89f7fe, #66a6ff); /* Линейный градиентный фон от голубого к синему */
+        color: #333; /* Цвет текста */
+        margin: 0;
+        padding: 20px;
+    }
+    h1, h2 {
+        color: #fff; /* Белый цвет текста для заголовков для лучшей видимости на градиентном фоне */
+    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+        }
+        td {
+            text-align: center;
+            padding: 8px;
+        }
+        tr:nth-child(even){background-color: #f2f2f2}
+        th:nth-child(6), td:nth-child(6) {
+            text-align: left;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="file"] {
+            border: none;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .login-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #007bff; /* Синяя кнопка */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background-color: #0056b3; /* Потемнее при наведении */
+        }
+        .search-container {
+            text-align: center; /* Выровнять по центру */
+            margin-bottom: 20px;
+        }
+
+        .search-container input[type="text"] {
+            width: 30%; /* Задать ширину поля поиска */
+            padding: 10px;
+            margin-right: 5px; /* Добавить пространство между полем и кнопкой */
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .search-container button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .search-container button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <h1>СПИСОК ТОВАРОВ/УСЛУГ</h1>
+    <div class="login-button-container">
+        <a href="/lk" class="login-button">Вход в личный кабинет</a>
+    </div>
+    <div class="search-container">
+        <form action="/search" method="get">
+            <input type="text" placeholder="Поиск..." name="search" required>
+            <button type="submit">Искать</button>
+        </form>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>НАЗВАНИЕ</th>
+                <th>ПОДРОБНОЕ ОПИСАНИЕ</th>
+                <th>ЦЕНА</th>
+                <th>ГОРОД</th>
+                <th>АВТОР</th>
+                <th>ДАТА СОЗДАНИЯ</th>
+                <th>ФОТО</th>
+                <th>ПРОСМОТР ОБЪЯВЛЕНИЯ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.title}">Название</td>
+                <td th:text="${product.description}">Описание</td>
+                <td th:text="${product.price}">Цена</td>
+                <td th:text="${product.city}">Город</td>
+                <td th:if="${product.user != null}" th:text="${product.user.name}">Автор</td>
+
+                <td th:text="${#temporals.format(product.dateOfCreated, 'dd.MM.yyyy HH:mm')}">Дата создания</td>
+                <td>
+                    <div th:if="${not #lists.isEmpty(product.images)}">
+                        <div th:each="image, iterStat : ${product.images}">
+                            <span th:if="${iterStat.index == 0 && image.isPreviewImage}" th:text="${image.name}">Фото</span>
+                        </div>
+                    </div>
+                    <span th:if="${#lists.isEmpty(product.images)}">Нет фото</span>
+                </td>
+                <td>
+                    <a th:if="${product.user != null}" th:href="@{'/product/' + ${product.id}}">Просмотр</a>
+                    <span th:if="${product.user == null}">Просмотр</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+        <title>User List</title>
+        <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>УПРАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯМИ</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Имя</th>
+        <th>Роль</th>
+        <th>Активность</th>
+        <th>Количество регистраций</th> <!-- Новый столбец -->
+        <th>Управление активностью</th>
+        <th>Управление пользователем</th>
+        <th>Управление ролями</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.name}"></td>
+        <td>
+            <span th:each="role : ${user.roles}" th:text="${role}">N/A</span>
+        </td>
+        <td th:text="${user.active} ? 'ДА' : 'НЕТ'">Да</td>
+        <td th:text="${user.loginCount}">0</td>
+        <td>
+            <div th:if="${user.active}">
+                <form th:action="@{'/admin/users/' + ${user.id} + '/deactivate'}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <button type="submit" class="btn">Забанить пользователя</button>
+                </form>
+            </div>
+            <div th:unless="${user.active}">
+                <form th:action="@{'/admin/users/' + ${user.id} + '/activate'}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <button type="submit" class="btn">Сделать активным</button>
+                </form>
+            </div>
+        </td>
+        <td>
+            <form th:action="@{'/admin/users/' + ${user.id} + '/delete'}" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <button type="submit" class="btn">Удалить пользователя</button>
+            </form>
+        </td>
+        <td>
+                    <form th:action="@{'/admin/users/' + ${user.id} + '/toggleRole'}" method="post">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <!-- Измените содержимое кнопки на основе того, есть ли у пользователя роль ROLE_ADMIN -->
+                        <button type="submit" class="btn" th:text="${user.roles.contains(T(com.example.Sale.models.Role).ROLE_ADMIN)} ? 'Снять роль админа' : 'Назначить админом'">Снять роль админа</button>
+                    </form>
+                </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
