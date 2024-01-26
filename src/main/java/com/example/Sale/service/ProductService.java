@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -77,35 +78,34 @@ public class ProductService {
         return image;
     }
 
-    public void updateProduct(Product product, MultipartFile... files) throws IOException {
-        // Удаляем старые изображения
-        product.getImages().clear();
+    @Transactional
+    public void updateProduct(Product product, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
+        // Load existing product from the database
+        Product existingProduct = productRepository.findById(product.getId()).orElse(null);
 
-        // Добавляем новые изображения (если они загружены)
-        if (files != null) {
-            for (int i=0; i< files.length && i<3; i++ ) {
-                MultipartFile file = files[i];
-                if (file != null && !file.isEmpty()) {
-                    Image updateImage = toImageEntity(file);
-                    if (i < product.getImages().size()) {
-                        // Если изображение уже существует на указанной позиции, заменяем его
-                        Image existingImage = product.getImages().get(i);
-                        existingImage.setPreviewImage(true);
-                        existingImage.setBytes(file.getBytes());
-                        log.debug("Заменено изображение на позиции {}: {}", i, file.getOriginalFilename());
-                    } else {
-                        // Иначе, добавляем новое изображение
-                        updateImage.setPreviewImage(i == 0);
-                        product.addImageToProduct(updateImage);
-                        log.debug("Добавлено изображение к товару: {}", file.getOriginalFilename());
-                    }
-                }
+        if (existingProduct != null) {
+            // Update product details
+            existingProduct.setTitle(product.getTitle());
+            existingProduct.setDescription(product.getDescription());
+            existingProduct.setPrice(product.getPrice());
+            existingProduct.setCity(product.getCity());
+
+            // Update images if new ones are provided
+            if (file1 != null && !file1.isEmpty()) {
+                updateImages(existingProduct, file1,1);
             }
-        }
-        log.info("Сохранение нового товара. Заголовок: {}; Автор: {}", product.getTitle(), product.getUser());
-        productRepository.save(product);
+            if (file2 != null && !file2.isEmpty()) {
+                updateImages(existingProduct, file2,2);
+            }
+            if (file3 != null && !file3.isEmpty()) {
+                updateImages(existingProduct, file3,3);
+            }
 
+            // Save the updated product to the database
+            productRepository.save(existingProduct);
+        }
     }
+
     public void updateImages(Product product, MultipartFile file, int index) throws IOException {
         if (file != null && !file.isEmpty()) {
             Image newImage = toImageEntity(file);
@@ -119,6 +119,8 @@ public class ProductService {
                 newImage.setPreviewImage(index == 0);
                 product.addImageToProduct(newImage);
             }
+
+
         }
     }
 

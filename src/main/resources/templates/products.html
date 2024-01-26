@@ -156,9 +156,8 @@
                 <td th:text="${#temporals.format(product.dateOfCreated, 'dd.MM.yyyy HH:mm')}">Дата создания</td>
                 <td>
                     <div th:if="${not #lists.isEmpty(product.images)}">
-                        <div th:each="image, iterStat : ${product.images}">
-                            <span th:if="${iterStat.index == 0 && image.isPreviewImage}" th:text="${image.name}">Фото</span>
-                        </div>
+                        <!-- Display the first image as the main photo -->
+                        <img th:src="@{'/images/' + ${product.images[0].name}}" width="200" height="200" alt="Main Image" />
                     </div>
                     <span th:if="${#lists.isEmpty(product.images)}">Нет фото</span>
                 </td>

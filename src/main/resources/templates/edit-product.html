@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Редактирование товара</title>
     <!-- Подключение стилей (путь к CSS-файлу может быть другим) -->
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles1.css}" href="/css/styles1.css">
 </head>
 <body>
 
@@ -35,24 +35,16 @@
         <input type="hidden" id="user" th:field="*{user}" th:value="${product.user.email}" />
 
         <div>
-            <label for="image">Изображение товара:</label>
-            <input type="file" id="image" name="file" />
-            <!-- Отображение уже загруженных изображений -->
-            <ul>
-                <li th:each="image, imageIndex : ${existingImages}">
-                    <img th:src="@{'/images/' + ${image.id}}" alt="Image" />
-                    <input type="file" name="existingImage" th:id="'existingImage' + ${imageIndex.index}" />
-                </li>
-            </ul>
-
-        </div>
-        <div>
-            <label for="image2">Дополнительное изображение 1:</label>
-            <input type="file" id="image2" name="file2" />
-        </div>
-        <div>
-            <label for="image3">Дополнительное изображение 2:</label>
-            <input type="file" id="image3" name="file3" />
+            <label for="image">Изображения товара:</label>
+            <div>
+                <input type="file" id="file1" name="file1" />
+            </div>
+            <div>
+                <input type="file" id="file2" name="file2" />
+            </div>
+            <div>
+                <input type="file" id="file3" name="file3" />
+            </div>
         </div>
         <!-- Поле для id продукта, которое останется скрытым -->
         <input type="hidden" th:field="*{id}" />

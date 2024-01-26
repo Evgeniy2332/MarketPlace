@@ -4,121 +4,7 @@
     <meta charset="UTF-8">
     <title>Личный кабинет</title>
     <!-- Add your CSS links here -->
-    <style>
-            body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right bottom, #89f7fe, #66a6ff); /* Линейный градиентный фон от голубого к синему */
-            color: #333; /* Цвет текста */
-            margin: 0;
-            padding: 20px;
-        }
-        h1, h2 {
-            color: #fff; /* Белый цвет текста для заголовков для лучшей видимости на градиентном фоне */
-        }
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 20px;
-            }
-            table, th, td {
-                border: 1px solid #ddd;
-            }
-            th {
-                background-color: #4CAF50;
-                color: white;
-                padding: 10px;
-            }
-            td {
-                text-align: center;
-                padding: 8px;
-            }
-            tr:nth-child(even){background-color: #f2f2f2}
-            th:nth-child(6), td:nth-child(6) {
-                text-align: left;
-            }
-            form {
-                background-color: #fff;
-                padding: 20px;
-                border-radius: 5px;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-                max-width: 600px;
-                margin: 20px auto;
-            }
-            label {
-                display: block;
-                margin: 10px 0 5px;
-            }
-            input[type="text"],
-            input[type="number"],
-            textarea {
-                width: 100%;
-                padding: 10px;
-                margin-bottom: 15px;
-                border: 1px solid #ddd;
-                border-radius: 4px;
-                box-sizing: border-box;
-            }
-            input[type="file"] {
-                border: none;
-            }
-            button {
-                background-color: #5cb85c;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                font-size: 16px;
-            }
-            button:hover {
-                background-color: #4cae4c;
-            }
-            .login-button {
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                background-color: #007bff; /* Синяя кнопка */
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 4px;
-                text-align: center;
-                text-decoration: none;
-                font-size: 16px;
-                cursor: pointer;
-            }
-
-            .login-button:hover {
-                background-color: #0056b3; /* Потемнее при наведении */
-            }
-            .search-container {
-                text-align: center; /* Выровнять по центру */
-                margin-bottom: 20px;
-            }
-
-            .search-container input[type="text"] {
-                width: 30%; /* Задать ширину поля поиска */
-                padding: 10px;
-                margin-right: 5px; /* Добавить пространство между полем и кнопкой */
-                border: 1px solid #ddd;
-                border-radius: 4px;
-                box-sizing: border-box;
-            }
-
-            .search-container button {
-                background-color: #5cb85c;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                font-size: 16px;
-            }
-
-            .search-container button:hover {
-                background-color: #4cae4c;
-            }
-        </style>
+    <link rel="stylesheet" th:href="@{/css/styles1.css}" href="/css/styles1.css">
 </head>
 <body>
 <div>
@@ -160,17 +46,16 @@
                 <input type="text" id="city" name="city" required />
             </div>
             <div>
-                <label for="file">ФОТО 1:</label>
-                <input type="file" id="file1" name="files[0]" />
-            </div>
-            <div>
-                <label for="file2">ФОТО 2:</label>
-                <input type="file" id="file2" name="files[1]" />
-            </div>
-            <div>
-                <label for="file3">ФОТО 3:</label>
-                <input type="file" id="file3" name="files[2]" />
-            </div>
+                    <label for="file1">ФОТО 1:</label>
+                    <input type="file" id="file1" name="files" />
+                    <div>
+                        <label for="file2">ФОТО 2:</label>
+                        <input type="file" id="file2" name="files" />
+                    </div>
+                    <div>
+                        <label for="file3">ФОТО 3:</label>
+                        <input type="file" id="file3" name="files" />
+                    </div>
             <div>
                 <button type="submit">Сохранить ТОВАР/УСЛУГУ</button>
             </div>
