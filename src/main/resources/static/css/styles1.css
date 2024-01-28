@@ -1,10 +1,14 @@
 body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right bottom, #89f7fe, #66a6ff); /* Линейный градиентный фон от голубого к синему */
-            color: #333; /* Цвет текста */
-            margin: 0;
-            padding: 20px;
-        }
+    background-image: url('/images/background.jpg');
+    background-size: cover; /* Adjust to your preference */
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Fixed background */
+    /* Additional styling */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #333; /* Text color */
+}
         h1, h2 {
             color: #fff; /* Белый цвет текста для заголовков для лучшей видимости на градиентном фоне */
         }

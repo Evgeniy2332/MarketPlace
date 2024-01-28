@@ -1,0 +1,114 @@
+body {
+    background-image: url("foto1.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Change to flex-start to align content at the top */
+    align-items: center;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Use min-height instead of height for dynamic content */
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+}
+
+/* Container Styles */
+div {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+}
+
+/* Personal Details Styles */
+section {
+    margin-top: 20px;
+}
+
+h2, h3 {
+    color: #fff;
+}
+
+p {
+    color: #fff;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Product Form Styles */
+form {
+    margin-top: 20px;
+    color: #fff;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    color: #fff;
+}
+
+th {
+    background-color: #333;
+}
+
+/* Logout Form Styles */
+#logout-form {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    div {
+        padding: 10px;
+        max-width: 100%;
+    }
+
+    h1 {
+        font-size: 24px;
+    }}

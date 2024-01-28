@@ -1,0 +1,107 @@
+body {
+    background-image: url("foto1.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Ensure at least full viewport height */
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+}
+
+/* Container Styles */
+div {
+    max-width: 800px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for better readability */
+    border-radius: 10px;
+    margin: 20px auto;
+    overflow: hidden; /* Добавляем, чтобы содержимое не выходило за пределы контейнера */
+}
+
+h1 {
+    color: #ffcc00; /* Header text color */
+}
+
+/* Login Button Styles */
+.login-button-container {
+    margin-top: 20px;
+}
+
+.login-button {
+    display: inline-block;
+    padding: 10px 15px;
+    text-decoration: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+}
+
+/* Search Container Styles */
+.search-container {
+    margin-top: 20px;
+}
+
+form {
+    display: flex;
+}
+
+input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+}
+
+td img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Product Link Styles */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+/* Responsive Styles */
+@media (max-width: 600px) {
+    div {
+        padding: 10px;
+    }
+}

@@ -1,13 +1,13 @@
 package com.example.Sale;
 
-import com.codeborne.selenide.Condition;
+
 import com.codeborne.selenide.Selenide;
 import com.example.Sale.models.Product;
 import com.example.Sale.models.User;
 import com.example.Sale.repositories.ProductRepository;
 import com.example.Sale.repositories.UserRepository;
 import com.example.Sale.service.UserService;
-import org.checkerframework.checker.units.qual.C;
+
 import org.junit.After;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +22,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.test.context.support.WithMockUser;
+
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -99,19 +99,22 @@ public class UserServiceTest {
     }
 
 
-
-
     @Test
-    public void testAutorizationAndCreateProduct(){
+    public void testAutorizationAndCreateProduct() {
 
 
-         Selenide.open("localhost:8080");//открываем страницу сайта
+        Selenide.open("http://193.104.57.235:8080/");//открываем страницу сайта
 
 
-         $x("//*[@class='login-button']").click();//кликаем на вход в личный кабинет
+        $x("//*[@class='login-button']").click();//кликаем на вход в личный кабинет
+        $x("/html/body/form/p[1]/label/input").setValue("pob32925@yandex.ru");
+        $x("/html/body/form/p[2]/label/input").setValue("123");
+        $x("/html/body/form/p[3]/input").click();
+        Selenide.sleep(5000);
 
 
     }
+
     @After
     public void amyTest() {
 
