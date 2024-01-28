@@ -1,10 +1,29 @@
 version: '3'
+
 services:
-  db:
-    image: 'postgres:latest'
-    environment:
-      - 'POSTGRES_DB=db1'
-      - 'POSTGRES_PASSWORD=123'
-      - 'POSTGRES_USER=postgres'
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - '5433:5432'
+      - "8080:8080"  # При необходимости измените порт на ваш выбор
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/db1
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=123
+      - SPRING_DATASOURCE_HIKARI_AUTO-COMMIT=false
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+      - SPRING_JPA_HIBERNATE_DDL-AUTO=update
+      - SPRING_JPA_GENERATE-DDL=true
+      - SPRING_JPA_SHOW-SQL=true
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: db1
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+    ports:
+      - "5433:5432"
