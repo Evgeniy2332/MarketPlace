@@ -1,5 +1,5 @@
 # Используем базовый образ с установленной Java (например, OpenJDK)
-FROM openjdk:16-jre-slim
+FROM openjdk:17-jre-slim
 
 # Указываем рабочую директорию в контейнере
 WORKDIR /app
