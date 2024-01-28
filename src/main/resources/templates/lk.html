@@ -97,10 +97,11 @@
                     </td>
                     <td>
                         <!-- Форма для удаления -->
-                        <form id="delete-product-form" th:action="@{'/product/delete/' + ${product.id}}" method="post" style="display: none;">
+                        <form th:id="'delete-product-form-' + ${product.id}" th:action="@{'/product/delete/' + ${product.id}}" method="post">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                             <input type="hidden" name="_method" value="delete"/>
                         </form>
-                        <a href="#" onclick="document.getElementById('delete-product-form').submit(); return false;">Удалить</a>
+                        <a href="#" th:onclick="'submitForm(\'delete-product-form-' + ${product.id} + '\')'">Удалить</a>
                     </td>
                 </tr>
             </tbody>
@@ -112,7 +113,12 @@
     </div>
 </section>
 
-<script> function performLogout() { document.getElementById('logout-form').submit(); } </script>
+
+<script>
+    function submitForm(formId) {
+        document.getElementById(formId).submit();
+    }
+</script>
 <form action="/logout" method="post" id="logout-form">
     <!-- Assuming Thymeleaf is processing this template, it will replace the following with the CSRF token -->
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>

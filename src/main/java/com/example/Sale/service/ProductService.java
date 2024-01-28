@@ -4,8 +4,7 @@ import com.example.Sale.models.Image;
 import com.example.Sale.models.Product;
 import com.example.Sale.repositories.ImageRepository;
 import com.example.Sale.repositories.ProductRepository;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Hibernate;
@@ -14,10 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -127,9 +125,13 @@ public class ProductService {
 
     // удаление продукта
     public void deleteProduct(Long id) {
-        log.info("Удаление товара с id: {}", id);
-        productRepository.deleteById(id);
-        log.info("Товар успешно удален.");
+        log.info("Попытка удаления товара с id: {}", id);
+        try {
+            productRepository.deleteById(id);
+            log.info("Товар успешно удален.");
+        } catch (Exception e) {
+            log.error("Ошибка при удалении товара с id: {}", id, e);
+        }
     }
 
     // получение продукта по Id
