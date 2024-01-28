@@ -2,6 +2,7 @@ package com.example.Sale.service;
 
 import com.example.Sale.models.Image;
 import com.example.Sale.models.Product;
+import com.example.Sale.models.User;
 import com.example.Sale.repositories.ImageRepository;
 import com.example.Sale.repositories.ProductRepository;
 
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -90,13 +92,13 @@ public class ProductService {
 
             // Update images if new ones are provided
             if (file1 != null && !file1.isEmpty()) {
-                updateImages(existingProduct, file1,1);
+                updateImages(existingProduct, file1, 1);
             }
             if (file2 != null && !file2.isEmpty()) {
-                updateImages(existingProduct, file2,2);
+                updateImages(existingProduct, file2, 2);
             }
             if (file3 != null && !file3.isEmpty()) {
-                updateImages(existingProduct, file3,3);
+                updateImages(existingProduct, file3, 3);
             }
 
             // Save the updated product to the database
@@ -145,8 +147,15 @@ public class ProductService {
         return product;
     }
 
+//    @Transactional(readOnly = true)
+//    public List<Product> searchProducts(String title) {
+//        return productRepository.findByTitleIgnoreCase(title);
+//    }
+//}
+
     @Transactional(readOnly = true)
-    public List<Product> searchProducts(String title) {
-        return productRepository.findByTitleIgnoreCase(title);
+    public List<Product> searchProducts(String title, String description, int minPrice, int maxPrice, String city, String author) {
+        return productRepository.findByTitleContainingIgnoreCaseAndDescriptionContainingIgnoreCaseAndPriceBetweenAndCityContainingIgnoreCaseAndUser_NameContainingIgnoreCase(
+                title, description, minPrice, maxPrice, city, author);
     }
 }

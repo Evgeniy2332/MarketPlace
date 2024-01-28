@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 
@@ -132,10 +133,30 @@ public class ProductController {
         return "redirect:/lk";
     }
 
+//    @GetMapping("/search")
+//    public String search(@RequestParam("search") String search, Model model) {
+//        log.info("Выполнение поиска по запросу: {}", search);
+//        List<Product> searchResults = productService.searchProducts(search);
+//        model.addAttribute("products", searchResults);
+//        return "products";
+//    }
+
+    // поиск
+
     @GetMapping("/search")
-    public String search(@RequestParam("search") String search, Model model) {
-        log.info("Выполнение поиска по запросу: {}", search);
-        List<Product> searchResults = productService.searchProducts(search);
+    public String search(
+            @RequestParam(name = "title", required = false) String title,
+            @RequestParam(name = "description", required = false) String description,
+            @RequestParam(name = "minPrice", required = false, defaultValue = "0") int minPrice,
+            @RequestParam(name = "maxPrice", required = false, defaultValue = "0") int maxPrice,
+            @RequestParam(name = "city", required = false) String city,
+            @RequestParam(name = "author", required = false) String author,
+            Model model
+    ) {
+        log.info("Выполнение поиска: title={}, description={}, minPrice={}, maxPrice={}, city={}, author={}",
+                title, description, minPrice, maxPrice, city, author);
+
+        List<Product> searchResults = productService.searchProducts(title, description, minPrice, maxPrice, city, author);
         model.addAttribute("products", searchResults);
         return "products";
     }

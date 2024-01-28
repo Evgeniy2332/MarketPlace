@@ -16,7 +16,13 @@
     </div>
     <div class="search-container">
         <form action="/search" method="get">
-            <input type="text" placeholder="Поиск..." name="search" required>
+            <input type="text" placeholder="Название" name="title">
+            <input type="text" placeholder="Описание" name="description">
+            <input type="text" placeholder="Минимальная цена" name="minPrice">
+            <input type="text" placeholder="Максимальная цена" name="maxPrice">
+            <input type="text" placeholder="Город" name="city">
+            <input type="text" placeholder="Автор" name="author">
+
             <button type="submit">Искать</button>
         </form>
     </div>
