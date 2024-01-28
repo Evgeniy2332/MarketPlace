@@ -51,7 +51,8 @@
                 <td>
                     <div th:if="${not #lists.isEmpty(product.images)}">
                         <!-- Display the first image as the main photo -->
-                        <img th:src="@{'/images/' + ${product.images[0].name}}" width="200" height="200" alt="Main Image" />
+
+                        <img th:if="${product.images[0].isPreviewImage}" th:src="@{/images/{id}(id=${product.images[0].id})}" alt="Main Image" th:alt="${product.title}" src=""/>
                     </div>
                     <span th:if="${#lists.isEmpty(product.images)}">Нет фото</span>
                 </td>

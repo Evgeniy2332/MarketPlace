@@ -73,7 +73,7 @@ table {
 
 th, td {
     padding: 10px;
-    text-align: left;
+    text-align: center;
     border-bottom: 1px solid #ddd;
 }
 
@@ -81,10 +81,15 @@ th {
     background-color: #333;
     color: #fff;
 }
+td {
+    text-align: center; /* Выравнивание содержимого по центру */
+}
 
 td img {
-    max-width: 100%;
-    height: auto;
+    max-width: 150%; /* Установка максимальной ширины изображения */
+        height: auto; /* Автоматическое вычисление высоты для сохранения пропорций */
+        display: block; /* Убирает возможное пространство под изображением */
+        margin: 0 auto; /* Центрирование изображения */
 }
 
 /* Product Link Styles */

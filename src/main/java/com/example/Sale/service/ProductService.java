@@ -2,10 +2,8 @@ package com.example.Sale.service;
 
 import com.example.Sale.models.Image;
 import com.example.Sale.models.Product;
-import com.example.Sale.models.User;
 import com.example.Sale.repositories.ImageRepository;
 import com.example.Sale.repositories.ProductRepository;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Hibernate;
@@ -14,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-
-import java.math.BigDecimal;
 import java.util.List;
 
 
