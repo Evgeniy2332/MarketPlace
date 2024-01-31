@@ -27,14 +27,14 @@ public class ProductService {
 
     // метод для получения списка продуктов по названию или полного списка при его отсутствии
     public List<Product> listProducts(String title) {
-        log.debug("Fetching product list, title filter: {}", title);
+        log.debug("Получение списка продуктов, фильтр по названию: {}", title);
 
         if (title != null) {
-            log.info("Finding products by title: {}", title);
+            log.info("Поиск продуктов по названию: {}", title);
             return productRepository.findByTitle(title);
         }
 
-        log.info("Title not provided, fetching all products.");
+        log.info("Название не указано, получение всех продуктов.");
         return productRepository.findAll();
     }
 
@@ -99,6 +99,7 @@ public class ProductService {
 
             // Save the updated product to the database
             productRepository.save(existingProduct);
+            log.info("Товар обновлен: {}", existingProduct.getId());
         }
     }
 
@@ -135,7 +136,7 @@ public class ProductService {
     // получение продукта по Id
     @Transactional(readOnly = true) // Добавляем управление транзакциями
     public Product getProductById(Long id) {
-        log.info("Fetching product with id: {}", id);
+        log.info("Получение продукта с идентификатором: {}", id);
         Product product = productRepository.findById(id).orElse(null);
         if (product != null) {
             Hibernate.initialize(product.getImages()); // Инициализируем коллекцию
