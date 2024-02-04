@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Blob;
+
 @Entity
 @Table(name = "imageSales")
 @Data
@@ -25,9 +27,12 @@ public class Image {
     private String contentType;
     @Column(name = "isPreviewImage")
     private boolean isPreviewImage;
+    //@Lob
+//    @Column(name = "bytes",columnDefinition = "oid")
+//    private byte[] bytes;
     @Lob
-    @Column(name = "bytes",columnDefinition = "oid")
-    private byte[] bytes;
-    @ManyToOne(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER)
+    @Column(name = "bytes", columnDefinition = "oid")
+    private Blob bytes;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     private Product product;
 }

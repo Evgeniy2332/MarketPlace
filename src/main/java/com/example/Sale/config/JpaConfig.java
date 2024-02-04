@@ -3,22 +3,17 @@ package com.example.Sale.config;
 
 
 import javax.sql.DataSource;
-
-import com.example.Sale.models.User;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import java.util.Collections;
 
 
 @Configuration
@@ -48,11 +43,12 @@ public class JpaConfig {
         factory.getJpaPropertyMap().put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 
         // Добавьте аннотацию @EnableJpaRepositories и укажите пакет с репозиториями
-        factory.setJpaPropertyMap(Collections.singletonMap("javax.persistence.validation.mode", "none"));
-        factory.setJpaPropertyMap(Collections.singletonMap("hibernate.validator.apply_to_ddl", "false"));
-        factory.setJpaPropertyMap(Collections.singletonMap("hibernate.validator.autoregister_listeners", "false"));
-        factory.setJpaPropertyMap(Collections.singletonMap("hibernate.validator.fail_fast", "false"));
-        factory.setJpaPropertyMap(Collections.singletonMap("hibernate.validator.apply_to_ddl", "false"));
+        factory.getJpaPropertyMap().put("hibernate.jdbc.lob.non_contextual_creation", "true");
+//        factory.setJpaPropertyMap(Collections.singletonMap("javax.persistence.validation.mode", "none"));
+//        factory.setJpaPropertyMap(Collections.singletonMap("hibernate.validator.apply_to_ddl", "false"));
+//        factory.setJpaPropertyMap(Collections.singletonMap("hibernate.validator.autoregister_listeners", "false"));
+//        factory.setJpaPropertyMap(Collections.singletonMap("hibernate.validator.fail_fast", "false"));
+//        factory.setJpaPropertyMap(Collections.singletonMap("hibernate.validator.apply_to_ddl", "false"));
 
         return factory;
     }
